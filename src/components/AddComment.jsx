@@ -1,61 +1,65 @@
-import { Component } from 'react'
+import { useState, useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap'
 
-class AddComment extends Component {
-  state = {
-    comment: {
-      comment: '',
-      rate: 1,
-      elementId: this.props.asin,
-    },
-  }
+let initialState = {
+  comment: {
+    comment: '',
+    rate: 1,
+    elementId: this.props.asin,
+  },
+}
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.asin !== this.props.asin) {
-      this.setState({
-        comment: {
-          ...this.state.comment,
-          elementId: this.props.asin,
-        },
-      })
-    }
-  }
 
-  sendComment = async (e) => {
-    e.preventDefault()
-    try {
-      let response = await fetch(
-        'https://striveschool-api.herokuapp.com/api/comments',
-        {
-          method: 'POST',
-          body: JSON.stringify(this.state.comment),
-          headers: {
-            'Content-type': 'application/json',
-            Authorization: 'Bearer inserisci-qui-il-tuo-token',
-          },
-        }
-      )
-      if (response.ok) {
-        alert('Recensione inviata!')
-        this.setState({
-          comment: {
-            comment: '',
-            rate: 1,
-            elementId: this.props.asin,
-          },
-        })
-      } else {
-        throw new Error('Qualcosa è andato storto')
-      }
-    } catch (error) {
-      alert(error)
-    }
-  }
+function AddComment(props) {
 
-  render() {
+  const [state, setState] = useState(initialState)
+
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.asin !== this.props.asin) {
+  //     this.setState({
+  //       comment: {
+  //         ...this.state.comment,
+  //         elementId: this.props.asin,
+  //       },
+  //     })
+  //   }
+  // }
+
+  // sendComment(e) => {
+  //   e.preventDefault()
+  //   try {
+  //     let response = await fetch(
+  //       'https://striveschool-api.herokuapp.com/api/comments',
+  //       {
+  //         method: 'POST',
+  //         body: JSON.stringify(this.state.comment),
+  //         headers: {
+  //           'Content-type': 'application/json',
+  //           Authorization: 'Bearer inserisci-qui-il-tuo-token',
+  //         },
+  //       }
+  //     )
+  //     if (response.ok) {
+  //       alert('Recensione inviata!')
+  //       this.setState({
+  //         comment: {
+  //           comment: '',
+  //           rate: 1,
+  //           elementId: this.props.asin,
+  //         },
+  //       })
+  //     } else {
+  //       throw new Error('Qualcosa è andato storto')
+  //     }
+  //   } catch (error) {
+  //     alert(error)
+  //   }
+  // }
+
+
     return (
       <div className="my-3">
-        <Form onSubmit={this.sendComment}>
+        {/* <Form onSubmit={sendComment()}> */}
           <Form.Group className="mb-2">
             <Form.Label>Recensione</Form.Label>
             <Form.Control
@@ -63,9 +67,9 @@ class AddComment extends Component {
               placeholder="Inserisci qui il testo"
               value={this.state.comment.comment}
               onChange={(e) =>
-                this.setState({
+                setState({
                   comment: {
-                    ...this.state.comment,
+                    state,
                     comment: e.target.value,
                   },
                 })
@@ -78,9 +82,9 @@ class AddComment extends Component {
               as="select"
               value={this.state.comment.rate}
               onChange={(e) =>
-                this.setState({
+                setState({
                   comment: {
-                    ...this.state.comment,
+                    ...state,
                     rate: e.target.value,
                   },
                 })
@@ -96,10 +100,10 @@ class AddComment extends Component {
           <Button variant="primary" type="submit">
             Invia
           </Button>
-        </Form>
+        {/* </Form> */}
       </div>
     )
-  }
 }
+
 
 export default AddComment
