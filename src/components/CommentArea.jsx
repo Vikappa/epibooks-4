@@ -50,13 +50,19 @@ function CommentArea(props) {
     }
   }, [props.asin])
   
-
+  function addNewComment(newComment) {
+    setState(prevState => ({
+      ...prevState,
+      comments: [...prevState.comments, newComment]
+    }))
+  }
+  
 
     return (
       <div className="text-center">
         {state.isLoading && <Loading />}
         {state.isError && <Error />}
-        <AddComment asin={props.asin} />
+        <AddComment asin={props.asin} addNewComment={addNewComment} />
         <CommentList commentsToShow={state.comments} />
       </div>
     )

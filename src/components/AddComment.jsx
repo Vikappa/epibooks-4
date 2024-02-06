@@ -39,6 +39,7 @@ setState({...state,
       )
       if (response.ok) {
         alert('Recensione inviata!')
+        props.addNewComment(state)
         setState({
             comment: '',
             rate: 1,
