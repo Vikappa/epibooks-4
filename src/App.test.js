@@ -129,3 +129,19 @@ test('Controllo che non ci siano li del componente SingleComment a pagina appena
 console.log(arrayLiComments.length)
   expect(arrayLiComments.length).toBe(0)
 })
+
+test('Controllo che cliccando su una bookcard vengano a galla dopo la fetch gli li con data-testid="li-comment" ', async () => {
+  render(<App />)
+
+  const random = function(tetto) {
+    return Math.floor(Math.random() * (tetto + 1)) 
+  }
+
+  const indiceTest = random(fantasy.length) 
+  const bookCards = await screen.findAllByTestId('book-card') // Aspetto che appaiano le card prima di cliccare
+  fireEvent.click(bookCards[indiceTest]) // Clicco una card a caso per far apparire i commenti
+
+  const arrayLiComments = await screen.findAllByTestId('li-comment') // Uso findAll perchè devo aspettare la fine della fetch
+  let verificaBooleana = arrayLiComments.length>0?true:false
+  expect(verificaBooleana).toBe(true)
+})
