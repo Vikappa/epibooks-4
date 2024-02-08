@@ -137,10 +137,10 @@ test('Controllo che cliccando su una bookcard vengano a galla dopo la fetch gli 
     return Math.floor(Math.random() * (tetto + 1)) 
   }
 
-  const indiceTest = random(fantasy.length) 
+  const indiceTest = random(10) 
   const bookCards = await screen.findAllByTestId('book-card') // Aspetto che appaiano le card prima di cliccare
   fireEvent.click(bookCards[indiceTest]) // Clicco una card a caso per far apparire i commenti
 
   const arrayLiComments = await screen.findAllByTestId('li-comment') // Uso findAll perchè devo aspettare la fine della fetch
-  expect(arrayLiComments.length>0?true:false).toBeTruthy()
+  expect(arrayLiComments.length).toBeTruthy()
 })
