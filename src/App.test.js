@@ -12,6 +12,7 @@ test('Check "Benvenuti in EpiBooks!" mounted', () => {
 
 test('Controllo che BookList.jsx renderizzi tante Card quanti sono gli oggetti libro dati in argomento', async () => {
   render(<BookList books={fantasy}/>)
+  // Aggiunto data-testid "book-card"
   const arrayCards = await screen.findAllByTestId('book-card')
   expect(arrayCards.length).toBe(fantasy.length)
 })
@@ -118,4 +119,13 @@ test('Controllo che cliccando su un secondo libro il bordo del primo torni norma
   expect(bookCards[indiceTest2].style.border).toBe('3px solid red')
   expect(bookCards[indiceTest1].style.border).not.toBe('3px solid red')
 
+})
+
+test('Controllo che non ci siano li del componente SingleComment a pagina appena avviata', () => {
+  render(<App />)
+  // Aggiunto data-testid "li-comment"
+
+  const arrayLiComments = screen.queryAllByTestId('li-comment') // Uso queryAll invece che findAll per non fare promise e attendere fetch
+console.log(arrayLiComments.length)
+  expect(arrayLiComments.length).toBe(0)
 })
