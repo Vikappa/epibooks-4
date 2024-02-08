@@ -14,7 +14,8 @@ function SingleBook(props) {
                 ? '3px solid red'
                 : 'none',
           }}
-        >
+          data-testid="book-card"
+          >
           <Card.Img variant="top" src={props.book.img} />
           <Card.Body>
             <Card.Title style={{ color: 'black' }}>
