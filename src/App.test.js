@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('Check "Benvenuti in EpiBooks!" mounted', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const welcomeSottotitolo = screen.getByText(/benvenuti in epibooks!/i); //A quanto pare non è case sensitive
+  expect(welcomeSottotitolo).toBeInTheDocument();
 });
