@@ -15,3 +15,16 @@ test('Controllo che BookList.jsx renderizzi tante Card quanti sono gli oggetti l
   const arrayCards = await screen.findAllByTestId('book-card');
   expect(arrayCards.length).toBe(fantasy.length);
 });
+
+test('Controllo che il componente CommentArea venga renderizzato correttamente.', () => {
+  render(<App/>)
+
+let FormConPlaceHolderNoto = screen.getByPlaceholderText("Inserisci qui il testo")
+let pRecensione = screen.getByText(/recensione/i)
+let pValutazione = screen.getByText(/valutazione/i)
+
+
+expect(pRecensione).toBeInTheDocument()
+expect(FormConPlaceHolderNoto).toBeInTheDocument()
+expect(FormConPlaceHolderNoto).toBeInTheDocument()
+})
