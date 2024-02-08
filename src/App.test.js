@@ -142,6 +142,5 @@ test('Controllo che cliccando su una bookcard vengano a galla dopo la fetch gli 
   fireEvent.click(bookCards[indiceTest]) // Clicco una card a caso per far apparire i commenti
 
   const arrayLiComments = await screen.findAllByTestId('li-comment') // Uso findAll perchè devo aspettare la fine della fetch
-  let verificaBooleana = arrayLiComments.length>0?true:false
-  expect(verificaBooleana).toBe(true)
+  expect(arrayLiComments.length>0?true:false).toBeTruthy()
 })
