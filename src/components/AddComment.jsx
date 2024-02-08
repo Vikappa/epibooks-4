@@ -14,7 +14,6 @@ function AddComment(props) {
   const [state, setState] = useState(initialState)
 
   useEffect(() => {
-console.log(props.asin)
 setState({...state,           
    elementId: props.asin,
 })
